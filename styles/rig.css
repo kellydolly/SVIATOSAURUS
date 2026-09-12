@@ -1,0 +1,112 @@
+/* SVIATOSAURUS — animations for the 3D sprites.
+   The PNG is cut into head / body / legs / tail slices that overlap, so each part can move on its
+   own pivot and the character walks, breathes, chomps and hops instead of sliding around as a card. */
+.dino-rig { overflow: visible; }
+.dino-rig .dw-head, .dino-rig .dw-body, .dino-rig .dw-leg, .dino-rig .dw-tail, .dino-rig .dw-root, .dino-rig .dw-shadow { transform-box: fill-box; }
+.dino-rig .dw-shadow { transform-origin: 50% 50%; }
+.dino-rig .dw-root { transform-origin: 50% 100%; }
+
+/* ---------- idle: breathing, head bob, tail sway ---------- */
+.dino-rig.alive .dw-body { animation: rBreathe 2.9s ease-in-out infinite; }
+.dino-rig.alive .dw-head { animation: rHeadIdle 2.9s ease-in-out infinite; }
+.dino-rig.alive .dw-tail { animation: rTailIdle 3.3s ease-in-out infinite; }
+.dino-rig.alive .dw-leg-a { animation: rLegIdleA 5.8s ease-in-out infinite; }
+.dino-rig.alive .dw-leg-b { animation: rLegIdleB 6.4s ease-in-out infinite; }
+@keyframes rBreathe { 0%, 100% { transform: scale(1, 1); } 50% { transform: scale(1.018, 1.032); } }
+@keyframes rHeadIdle { 0%, 100% { transform: translateY(0) rotate(0deg); } 32% { transform: translateY(-1.6%) rotate(-2.2deg); } 68% { transform: translateY(-0.7%) rotate(1.8deg); } }
+@keyframes rTailIdle { 0%, 100% { transform: rotate(-3deg); } 50% { transform: rotate(4.5deg); } }
+@keyframes rLegIdleA { 0%, 88%, 100% { transform: rotate(0deg); } 93% { transform: rotate(-5deg); } }
+@keyframes rLegIdleB { 0%, 90%, 100% { transform: rotate(0deg); } 95% { transform: rotate(4deg); } }
+
+/* ---------- walking ---------- */
+.dino-rig.walking .dw-leg-a { animation: rStepA .52s ease-in-out infinite; }
+.dino-rig.walking .dw-leg-b { animation: rStepB .52s ease-in-out infinite; }
+.dino-rig.walking .dw-root { animation: rWalkRoot .52s ease-in-out infinite; }
+.dino-rig.walking .dw-body { animation: rWalkBody .52s ease-in-out infinite; }
+.dino-rig.walking .dw-head { animation: rWalkHead .52s ease-in-out infinite; }
+.dino-rig.walking .dw-tail { animation: rWalkTail .52s ease-in-out infinite; }
+.dino-rig.walking .dw-shadow { animation: rWalkShadow .52s ease-in-out infinite; }
+@keyframes rStepA { 0%, 100% { transform: rotate(-10deg); } 50% { transform: rotate(10deg); } }
+@keyframes rStepB { 0%, 100% { transform: rotate(10deg); } 50% { transform: rotate(-10deg); } }
+@keyframes rWalkRoot { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-2.2%); } }
+@keyframes rWalkBody { 0%, 100% { transform: rotate(-1.2deg); } 50% { transform: rotate(1.2deg); } }
+@keyframes rWalkHead { 0%, 100% { transform: translateY(0.4%) rotate(2.6deg); } 50% { transform: translateY(-1%) rotate(-2.6deg); } }
+@keyframes rWalkTail { 0%, 100% { transform: rotate(-6deg); } 50% { transform: rotate(6deg); } }
+@keyframes rWalkShadow { 0%, 100% { transform: scale(1); opacity: .22; } 50% { transform: scale(.9); opacity: .17; } }
+
+/* ---------- roar / call ---------- */
+.dino-rig.roar .dw-head { animation: rRoarHead 1.2s ease-in-out; }
+.dino-rig.roar .dw-body { animation: rRoarBody 1.2s ease-in-out; }
+.dino-rig.roar .dw-root { animation: rRoarShake 1.2s ease-in-out; }
+.dino-rig.roar .dw-tail { animation: rWag .18s ease-in-out 6; }
+@keyframes rRoarHead { 0% { transform: none; } 16% { transform: rotate(-8deg) translateY(-2.2%) scale(1.05); } 72% { transform: rotate(-7deg) translateY(-2.2%) scale(1.045); } 100% { transform: none; } }
+@keyframes rRoarBody { 0% { transform: none; } 18% { transform: scale(1.05, 1.07); } 75% { transform: scale(1.04, 1.06); } 100% { transform: none; } }
+@keyframes rRoarShake { 0%, 100% { transform: translateX(0); } 22% { transform: translateX(-1.2%); } 38% { transform: translateX(1.2%); } 54% { transform: translateX(-.8%); } 70% { transform: translateX(.8%); } }
+
+/* ---------- calling with a closed mouth (herbivores) ---------- */
+.dino-rig.teeth .dw-head { animation: rCallHead 1.4s ease-in-out; }
+.dino-rig.teeth .dw-body { animation: rBreathe .7s ease-in-out 2; }
+@keyframes rCallHead { 0%, 100% { transform: none; } 25% { transform: rotate(-6deg) translateY(-1.8%) scale(1.035); } 60% { transform: rotate(-4deg) translateY(-1%) scale(1.02); } }
+
+/* ---------- eating ---------- */
+.dino-rig.eat .dw-head { animation: rEatHead 1.6s ease-in-out; }
+.dino-rig.eat .dw-body { animation: rEatBody 1.6s ease-in-out; }
+@keyframes rEatHead {
+  0% { transform: none; } 18% { transform: rotate(9deg) translateY(7%); }
+  28% { transform: rotate(5deg) translateY(4%) scaleY(.93); } 38% { transform: rotate(9deg) translateY(7%); }
+  48% { transform: rotate(5deg) translateY(4%) scaleY(.93); } 58% { transform: rotate(9deg) translateY(7%); }
+  68% { transform: rotate(5deg) translateY(4%) scaleY(.94); } 82% { transform: rotate(4deg) translateY(2%); } 100% { transform: none; }
+}
+@keyframes rEatBody { 0%, 100% { transform: none; } 30% { transform: scale(1.02, .98) translateY(1%); } 70% { transform: scale(1.02, .98) translateY(1%); } }
+
+/* ---------- happy hop (with follow-through on the head) ---------- */
+.dino-rig.happy .dw-root { animation: rHop .55s ease-in-out 2; }
+.dino-rig.happy .dw-head { animation: rHopHead .55s ease-in-out 2; }
+.dino-rig.happy .dw-leg-a { animation: rHopLegA .55s ease-in-out 2; }
+.dino-rig.happy .dw-leg-b { animation: rHopLegB .55s ease-in-out 2; }
+.dino-rig.happy .dw-tail { animation: rWag .275s ease-in-out 4; }
+.dino-rig.happy .dw-shadow { animation: rHopShadow .55s ease-in-out 2; }
+@keyframes rHop { 0%, 100% { transform: translateY(0) scale(1, 1); } 14% { transform: translateY(1.5%) scale(1.05, .93); } 46% { transform: translateY(-13%) scale(.96, 1.06); } 78% { transform: translateY(1%) scale(1.04, .95); } }
+@keyframes rHopHead { 0%, 100% { transform: rotate(0deg) translateY(0); } 30% { transform: rotate(4deg) translateY(2%); } 60% { transform: rotate(-5deg) translateY(-1.2%); } }
+@keyframes rHopLegA { 0%, 100% { transform: rotate(0deg); } 46% { transform: rotate(-14deg); } }
+@keyframes rHopLegB { 0%, 100% { transform: rotate(0deg); } 46% { transform: rotate(14deg); } }
+@keyframes rHopShadow { 0%, 100% { transform: scale(1); opacity: .22; } 46% { transform: scale(.7); opacity: .1; } }
+
+/* ---------- tail wag / looking around ---------- */
+.dino-rig.wag .dw-tail { animation: rWag .3s ease-in-out 6; }
+.dino-rig.wag .dw-body { animation: rSway .3s ease-in-out 6; }
+.dino-rig.wag .dw-head { animation: rSwayHead .3s ease-in-out 6; }
+@keyframes rWag { 0%, 100% { transform: rotate(-11deg); } 50% { transform: rotate(13deg); } }
+@keyframes rSway { 0%, 100% { transform: rotate(-1.6deg); } 50% { transform: rotate(1.6deg); } }
+@keyframes rSwayHead { 0%, 100% { transform: rotate(1.6deg); } 50% { transform: rotate(-1.6deg); } }
+.dino-rig.look .dw-head { animation: rLook 1.5s ease-in-out; }
+@keyframes rLook { 0%, 100% { transform: rotate(0deg); } 28% { transform: rotate(-9deg) translateX(-1.5%); } 66% { transform: rotate(9deg) translateX(1.5%); } }
+
+/* ---------- stomping ---------- */
+.dino-rig.stomp .dw-leg-a { animation: rStompLeg .5s ease-in-out 2; }
+.dino-rig.stomp .dw-root { animation: rStompBody .5s ease-in-out 2; }
+.dino-rig.stomp .dw-head { animation: rStompHead .5s ease-in-out 2; }
+@keyframes rStompLeg { 0%, 100% { transform: rotate(0deg) translateY(0); } 35% { transform: rotate(-22deg) translateY(-7%); } 55% { transform: rotate(2deg) translateY(0); } }
+@keyframes rStompBody { 0%, 100% { transform: translateY(0) scale(1, 1); } 35% { transform: translateY(-3%) scale(.99, 1.03); } 58% { transform: translateY(1%) scale(1.03, .96); } }
+@keyframes rStompHead { 0%, 100% { transform: translateY(0); } 35% { transform: translateY(-1.2%) rotate(-3deg); } 62% { transform: translateY(1.6%) rotate(3deg); } }
+
+/* ---------- reaching up / showing off plates ---------- */
+.dino-rig.reach .dw-head { animation: rReach 2.2s ease-in-out; }
+.dino-rig.reach .dw-body { animation: rReachBody 2.2s ease-in-out; }
+.dino-rig.reach .dw-root { animation: rReachRoot 2.2s ease-in-out; }
+@keyframes rReachRoot { 0%, 100% { transform: none; } 30% { transform: translateY(-3%); } 70% { transform: translateY(-3%); } }
+@keyframes rReach { 0%, 100% { transform: none; } 28% { transform: translateY(-3%) rotate(-9deg) scale(1.04); } 72% { transform: translateY(-2.6%) rotate(-7deg) scale(1.04); } }
+@keyframes rReachBody { 0%, 100% { transform: none; } 30% { transform: scale(1.02, 1.09); } 70% { transform: scale(1.02, 1.09); } }
+.dino-rig.plates .dw-body { animation: rShine .5s ease-in-out 3; }
+.dino-rig.plates .dw-tail { animation: rWag .25s ease-in-out 6; }
+@keyframes rShine { 0%, 100% { filter: brightness(1); } 50% { filter: brightness(1.35) saturate(1.3); } }
+
+/* ---------- sleeping / surprise ---------- */
+.dino-rig.sleep .dw-head { animation: rSleepHead 3.6s ease-in-out infinite; }
+.dino-rig.sleep .dw-body { animation: rSleepBody 3.6s ease-in-out infinite; }
+@keyframes rSleepHead { 0%, 100% { transform: rotate(7deg) translateY(3%); } 50% { transform: rotate(8deg) translateY(4.5%); } }
+@keyframes rSleepBody { 0%, 100% { transform: scale(1, 1); } 50% { transform: scale(1.02, 1.04); } }
+.dino-rig.surprise .dw-root { animation: rSurprise .6s ease-in-out; }
+.dino-rig.surprise .dw-head { animation: rSurpriseHead .6s ease-in-out; }
+@keyframes rSurprise { 0%, 100% { transform: scale(1, 1); } 30% { transform: scale(1.07, .93); } 60% { transform: scale(.95, 1.07); } }
+@keyframes rSurpriseHead { 0%, 100% { transform: none; } 35% { transform: translateY(-6%) scale(1.08); } }

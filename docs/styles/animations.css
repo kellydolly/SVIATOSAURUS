@@ -1,0 +1,92 @@
+/* SVIATOSAURUS — dinosaur body-part animations (driven by classes on the .dino svg) */
+.dino { overflow: visible; }
+.dino .dw-root { transform-box: fill-box; transform-origin: 50% 100%; }
+
+/* idle breathing + gentle tail sway (always on) */
+.dino.alive .dw-body { animation: breathe 2.6s ease-in-out infinite; transform-box: fill-box; transform-origin: 50% 100%; }
+.dino.alive .dw-tail { animation: tailIdle 2.8s ease-in-out infinite; }
+.dino.alive .dw-head { animation: headIdle 3.4s ease-in-out infinite; }
+.dino.alive .dw-eye .dw-lid { animation: blink 4.5s linear infinite; }
+.dino.alive .dw-eye .dw-lid { opacity: 0; }
+
+/* walking */
+.dino.walking .dw-leg-a { animation: legA .55s ease-in-out infinite; }
+.dino.walking .dw-leg-b { animation: legB .55s ease-in-out infinite; }
+.dino.walking .dw-root { animation: walkBob .55s ease-in-out infinite; }
+
+/* roar / call */
+.dino.roar .dw-jaw { animation: jawOpen 1.2s ease-in-out; }
+.dino.roar .dw-head { animation: headRoar 1.2s ease-in-out; }
+.dino.roar .dw-root { animation: roarShake 1.2s ease-in-out; }
+
+/* eat */
+.dino.eat .dw-head { animation: headEat 1.6s ease-in-out; }
+.dino.eat .dw-jaw { animation: jawChomp .4s ease-in-out 4; }
+.dino.eat .dw-neck { animation: neckEat 1.6s ease-in-out; }
+
+/* happy (petted) */
+.dino.happy .dw-root { animation: hop .5s ease-in-out 2; }
+.dino.happy .dw-tail { animation: tailWag .3s ease-in-out 6; }
+.dino.happy .dw-eye .dw-lid { opacity: 1 !important; animation: none; }
+.dino.happy .dw-eye .dw-pupil { transform: translateY(1px); }
+
+/* tail wag */
+.dino.wag .dw-tail { animation: tailWag .35s ease-in-out 5; }
+
+/* stomp */
+.dino.stomp .dw-leg-a { animation: stompLeg .5s ease-in-out 2; }
+.dino.stomp .dw-root { animation: stompBody .5s ease-in-out 2; }
+
+/* neck reach (sauropods) */
+.dino.reach .dw-neck { animation: neckReach 2.2s ease-in-out; }
+.dino.reach .dw-jaw { animation: jawChomp .4s ease-in-out 3; animation-delay: .8s; }
+
+/* head shake / look */
+.dino.look .dw-head { animation: headLook 1.4s ease-in-out; }
+
+/* show teeth */
+.dino.teeth .dw-jaw { animation: jawHalf 1.4s ease-in-out; }
+.dino.teeth .dw-head { animation: headLow 1.4s ease-in-out; }
+
+/* plates / sail shimmer */
+.dino.plates .dw-plates .dw-plate { animation: plateGlow .5s ease-in-out 3; }
+.dino.plates .dw-sail { animation: plateGlow .5s ease-in-out 3; }
+
+/* sleeping */
+.dino.sleep .dw-eye .dw-lid { opacity: 1 !important; animation: none; }
+.dino.sleep .dw-head { animation: none; transform: rotate(6deg) translateY(4px); }
+.dino.sleep .dw-body { animation: breathe 3.6s ease-in-out infinite; }
+
+/* dizzy / surprised */
+.dino.surprise .dw-root { animation: surprise .6s ease-in-out; }
+
+/* skeleton -> alive morph */
+.morph-in { animation: morphIn 1.4s ease-out forwards; }
+.morph-out { animation: morphOut 1.4s ease-in forwards; }
+
+@keyframes breathe { 0%, 100% { transform: scale(1, 1); } 50% { transform: scale(1.012, 1.03); } }
+@keyframes tailIdle { 0%, 100% { transform: rotate(0deg); } 50% { transform: rotate(4deg); } }
+@keyframes headIdle { 0%, 100% { transform: rotate(0deg); } 50% { transform: rotate(-2.5deg) translateY(-1px); } }
+@keyframes blink { 0%, 92%, 100% { opacity: 0; } 94%, 98% { opacity: 1; } }
+@keyframes legA { 0%, 100% { transform: rotate(-16deg); } 50% { transform: rotate(16deg); } }
+@keyframes legB { 0%, 100% { transform: rotate(16deg); } 50% { transform: rotate(-16deg); } }
+@keyframes walkBob { 0%, 100% { transform: translateY(0); } 25% { transform: translateY(-2%); } 75% { transform: translateY(-2%); } }
+@keyframes jawOpen { 0% { transform: rotate(0); } 20% { transform: rotate(22deg); } 75% { transform: rotate(22deg); } 100% { transform: rotate(0); } }
+@keyframes jawHalf { 0% { transform: rotate(0); } 25% { transform: rotate(10deg); } 80% { transform: rotate(10deg); } 100% { transform: rotate(0); } }
+@keyframes jawChomp { 0%, 100% { transform: rotate(0); } 50% { transform: rotate(16deg); } }
+@keyframes headRoar { 0% { transform: rotate(0); } 20% { transform: rotate(14deg) translateY(-4px); } 75% { transform: rotate(14deg) translateY(-4px); } 100% { transform: rotate(0); } }
+@keyframes headLow { 0% { transform: rotate(0); } 25% { transform: rotate(-8deg) translateY(6px); } 80% { transform: rotate(-8deg) translateY(6px); } 100% { transform: rotate(0); } }
+@keyframes roarShake { 0%, 100% { transform: translate(0); } 25% { transform: translate(-1.5%, 0); } 40% { transform: translate(1.5%, 0); } 55% { transform: translate(-1%, 0); } 70% { transform: translate(1%, 0); } }
+@keyframes headEat { 0% { transform: rotate(0); } 25% { transform: rotate(-24deg) translate(-4px, 8px); } 80% { transform: rotate(-24deg) translate(-4px, 8px); } 100% { transform: rotate(0); } }
+@keyframes neckEat { 0% { transform: rotate(0); } 25% { transform: rotate(-12deg); } 80% { transform: rotate(-12deg); } 100% { transform: rotate(0); } }
+@keyframes hop { 0%, 100% { transform: translateY(0) scale(1); } 40% { transform: translateY(-8%) scale(1.02, .98); } 60% { transform: translateY(-8%) scale(1.02, .98); } }
+@keyframes tailWag { 0%, 100% { transform: rotate(-8deg); } 50% { transform: rotate(10deg); } }
+@keyframes stompLeg { 0%, 100% { transform: rotate(0) translateY(0); } 35% { transform: rotate(-24deg) translateY(-8%); } 55% { transform: rotate(0) translateY(0); } }
+@keyframes stompBody { 0%, 100% { transform: translateY(0); } 35% { transform: translateY(-2%); } 58% { transform: translateY(1%); } 70% { transform: translateY(0); } }
+@keyframes neckReach { 0% { transform: rotate(0); } 30% { transform: rotate(14deg); } 75% { transform: rotate(14deg); } 100% { transform: rotate(0); } }
+@keyframes headLook { 0%, 100% { transform: rotate(0); } 30% { transform: rotate(-10deg); } 70% { transform: rotate(10deg); } }
+@keyframes plateGlow { 0%, 100% { filter: brightness(1); } 50% { filter: brightness(1.5) saturate(1.4); } }
+@keyframes surprise { 0%, 100% { transform: scale(1); } 30% { transform: scale(1.06, .94); } 60% { transform: scale(.96, 1.06); } }
+@keyframes morphIn { 0% { opacity: 0; transform: scale(.9); filter: brightness(3) saturate(0); } 100% { opacity: 1; transform: scale(1); filter: brightness(1) saturate(1); } }
+@keyframes morphOut { 0% { opacity: 1; } 100% { opacity: 0; transform: scale(1.02); filter: brightness(3); } }
+

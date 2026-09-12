@@ -1,0 +1,7 @@
+# generated voice clips (rebuild with tools/gen_voice.py)
+audio/voice/
+# raw Canva exports and scratch
+tools/_canva/
+tools/__pycache__/
+__pycache__/
+*.log

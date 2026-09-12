@@ -1,0 +1,66 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#ff8a1f">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="SVIATOSAURUS">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="assets/icons/apple-180.png">
+<title>SVIATOSAURUS 🦖</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles/main.css">
+<link rel="stylesheet" href="styles/animations.css">
+<link rel="stylesheet" href="styles/rig.css">
+<link rel="stylesheet" href="styles/games.css">
+<div id="app">
+    <div id="screen-root"></div>
+    <div id="hud"></div>
+    <div id="bubble"></div>
+    <div id="toast"></div>
+    <canvas id="fx-canvas"></canvas>
+    <div id="splash">
+      <div class="sun"></div>
+      <div class="logo"><span>🦖</span> SVIATOSAURUS</div>
+      <div class="dino-hero"></div>
+      <div class="tap">👆 Tap to play!</div>
+    </div>
+  </div>
+
+  <!-- data -->
+  <script src="data/dinosaurs.js"></script>
+  <script src="assets/img-manifest.js"></script>
+  <script src="assets/props.js"></script>
+  <!-- assets (SVG art) -->
+  <script src="assets/dino-art.js"></script>
+  <script src="assets/skeleton-art.js"></script>
+  <script src="assets/creator-art.js"></script>
+  <script src="assets/scenes.js"></script>
+  <!-- audio -->
+  <script src="audio/sfx.js"></script>
+  <script src="audio/voice-sprite.js"></script>
+  <script src="audio/voice.js"></script>
+  <!-- core -->
+  <script src="components/state.js"></script>
+  <script src="components/app.js"></script>
+  <script src="components/missions.js"></script>
+  <!-- screens -->
+  <script src="components/worldmap.js"></script>
+  <script src="components/habitat.js"></script>
+  <script src="components/viewer.js"></script>
+  <script src="components/hub.js"></script>
+  <script src="components/collection.js"></script>
+  <!-- games -->
+  <script src="games/dig.js"></script>
+  <script src="games/skeleton.js"></script>
+  <script src="games/puzzle.js"></script>
+  <script src="games/draw.js"></script>
+  <script src="games/eggs.js"></script>
+  <script src="games/care.js"></script>
+  <script src="games/matching.js"></script>
+  <script src="games/creator.js"></script>
+<script>
+if ('serviceWorker' in navigator) addEventListener('load', () => navigator.serviceWorker.register('sw.js').catch(() => {}));
+</script>
